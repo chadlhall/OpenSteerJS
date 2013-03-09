@@ -1,52 +1,51 @@
+define(function (require)
+{
+	"use strict";
 
-define(function(require) {
-
-	return Class.extend({
-		init: function()
+	var moduleName = "GameClock";
+	var GameClock = Class.extend({
+		init: function ()
 		{
-			this.fixedFrameRate = 0;
-			this.setPausedState = false;
-			this.setAnimationMode = false;
-			this.variableFrameRateMode = true;
-
-			this.previousRealTime = 0;
-			this.previousSimulationTime = 0;
-
-			this.startTime = 0;
-			this.totalRealTime = 0;
-			this.totalSimulationTime = 0;
-			this.totalPausedTime = 0;
-
-			this.totalAdvanceTime = 0;
-			this.elapsedSimulationTime = 0;
-
-			this.elapsedNonWaitRealTime = 0;
-			this.newAdvanceTime = 0;
+			this.wallLastTimestamp = Date.now();
+			this.gameTime = 0;
 		},
 
-		update: function()
+		tick: function ()
 		{
-			var timeNow = new Date().getTime();
+			var wallCurrent = Date.now();
+			var wallDelta = (wallCurrent - this.wallLastTimestamp);
+			this.wallLastTimestamp = wallCurrent;
+			this.gameTime += wallDelta;
 
-			if (this.startTime === 0)
-			{
-				this.startTime = timeNow;
-			}
-
-			this.totalRealTime = timeNow - this.startTime;
-			this.elapsedRealTime = this.totalRealTime - this.previousRealTime;
-			this.totalSimulationTime = this.totalRealTime + this.totalAdvanceTime - this.totalPausedTime;
-
-			this.elapsedSimulationTime = this.totalSimulationTime - this.previousSimulationTime;
-
-			this.previousSimulationTime = timeNow;
-			this.previousRealTime = timeNow;
+			return wallDelta;
 		},
 
-		updateSmoothedRegisters: function()
+		getLocalTime: function()
 		{
+			return this.wallLastTimestamp;
+		},
 
+		getGameTime: function()
+		{
+			return this.gameTime;
+		},
+
+		setGameTime: function(time)
+		{
+			this.gameTime = time;
 		}
 	});
 
+	var instance = null;
+	var getGameClock = function ()
+	{
+		if (instance === null)
+		{
+			instance = new GameClock();
+		}
+
+		return instance;
+	};
+
+	return getGameClock();
 });

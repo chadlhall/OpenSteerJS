@@ -4,10 +4,27 @@
  */
 define(function(require) {
 
+	var MathUtils = require("engine/MathUtils");
+
+	var Point = MathUtils.Point;
+	var Dimension = MathUtils.Dimension;
+
 	return Class.extend({
-		init: function()
+		init: function(type, position, size)
+		{
+			this.id = 0;
+			this.type = type;
+			this.position = new Point(position);
+			this.size = new Dimension(size);
+		},
+
+		update: function(timeDx)
 		{
 
+		},
+
+		draw: function(ctx)
+		{
 
 		}
 	});
