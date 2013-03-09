@@ -4,7 +4,7 @@
  */
 define(function(require) {
 
-	var Entity = require("Entity");
+	var Entity = require("engine/Entity");
 
 	return Entity.extend({
 		init: function()
