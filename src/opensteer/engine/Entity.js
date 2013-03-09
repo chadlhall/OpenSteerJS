@@ -19,8 +19,9 @@ define(function(require) {
 			this.rotation = 0;
 			this.physicsBody = null;
 
-			this.movementVector = new Point(0, 0);
+			this.movementVector = new Point(0, 0); // They start out pointing up
 			this.velocity = 10;
+			this.rotationalVelocity = 0;
 		},
 
 		update: function(timeDx)

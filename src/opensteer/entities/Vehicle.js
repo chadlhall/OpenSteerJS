@@ -16,6 +16,8 @@ define(function(require) {
 
 			this.fillColor = fillColor;
 			this.steerSystem = steerSystem;
+
+			this.movementVector.x = 1;
 		},
 
 		update: function(timeDx)
@@ -33,21 +35,21 @@ define(function(require) {
 			ctx.fillStyle = this.fillColor;
 			ctx.beginPath();
 
-			// Move to lower left of triangle
-			ctx.moveTo(Math.cos(1.25*Math.PI) * (this.size.width/2), Math.sin(1.25*Math.PI) * (this.size.height/2));
+			// Move to right side of triangle
+			ctx.moveTo(Math.cos(0) * (this.size.width/2), Math.sin(0) * (this.size.height/2));
 
-			// draw to upper
-			ctx.lineTo(Math.cos(Math.PI/2) * (this.size.width/2), Math.sin(Math.PI/2) * (this.size.height/2));
+			// draw to upper left
+			ctx.lineTo(Math.cos(Math.PI * 0.75) * (this.size.width/2), Math.sin(Math.PI * 0.75) * (this.size.height/2));
 
-			// Draw to lower right
-			ctx.lineTo(Math.cos(1.75*Math.PI) * (this.size.width/2), Math.sin(Math.PI*1.75) * (this.size.height/2));
+			// Draw to lower left
+			ctx.lineTo(Math.cos(Math.PI * 1.25) * (this.size.width/2), Math.sin(Math.PI * 1.25) * (this.size.height/2));
 
 			ctx.closePath();
 			ctx.fill();
 
 			// Move to top right, draw a white line down the middle so we can see where forward is
 			ctx.beginPath();
-			ctx.moveTo(Math.cos(Math.PI/2) * (this.size.width/2), Math.sin(Math.PI/2) * (this.size.height/2));
+			ctx.moveTo(Math.cos(0) * (this.size.width/2), Math.sin(0) * (this.size.height/2));
 			ctx.lineTo(0, 0);
 			ctx.strokeStyle = "White";
 			ctx.stroke();
@@ -67,6 +69,13 @@ define(function(require) {
 		 */
 		applySteeringForce:function(force)
 		{
+			if (this.fillColor === "Green")
+			{
+				console.log(this.rotation);
+			}
+
+			this.movementVector.x = force.x;
+			this.movementVector.y = force.y;
 
 		}
 	});

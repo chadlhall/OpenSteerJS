@@ -5,6 +5,8 @@
  */
 define(function(require) {
 
+	var Vector2 = require("engine/MathUtils").Vector2;
+
 	return Class.extend({
 
 		init: function(entities)
@@ -20,7 +22,13 @@ define(function(require) {
 		 */
 		steerForWander: function(entity)
 		{
+			var newRotation = entity.rotation + (Math.random() > 0.4 ? (Math.PI/180) : -(Math.PI/180)); //entity.rotation + (Math.random() > 0.1 ? 0.1 : -0.1);
 
+			var newUp = new Vector2(Math.cos(newRotation), -Math.sin(newRotation));
+
+			entity.rotation = newRotation;
+
+			return newUp;
 		},
 
 		// Seek behavior

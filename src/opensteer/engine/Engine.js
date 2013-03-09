@@ -89,10 +89,10 @@ define(function(require) {
 
 				entity.position.x = physicsBody.GetPosition().x*PIXEL_SCALE;
 				entity.position.y = physicsBody.GetPosition().y*PIXEL_SCALE;
-				entity.rotation = physicsBody.GetAngle();
+				//entity.rotation = physicsBody.GetAngle();
 
 				var linearVelocity = physicsBody.GetLinearVelocity();
-				if (linearVelocity.x !== 0 || linearVelocity.y !== 0 || !entity.movementVector.isOrigin())
+				if (!entity.movementVector.isOrigin())
 				{
 					var moveVector = entity.movementVector;
 					var velocity = entity.velocity;
@@ -104,7 +104,12 @@ define(function(require) {
 					this.impulseVector.y
 							= physicsBody.GetMass() * ((moveVector.y * velocity) - linearVelocity.y);
 
-					physicsBody.ApplyForce(this.impulseVector, physicsBody.GetWorldCenter());
+					physicsBody.ApplyImpulse(this.impulseVector, physicsBody.GetWorldCenter());
+				}
+
+				if (entity.rotationalVelocity !== 0)
+				{
+					physicsBody.ApplyTorque(entity.rotationalVelocity);
 				}
 			}
 		},
