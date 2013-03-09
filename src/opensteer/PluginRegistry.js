@@ -51,7 +51,7 @@ define(function(require) {
 			var i;
 			for (i = 0; i < this.registry.length; i++)
 			{
-				func(this.registry[i]);
+				this.registry[i][func]();
 			}
 		},
 
@@ -72,7 +72,7 @@ define(function(require) {
 			{
 				if (this.registry[i].requestInitialSelection)
 				{
-					return this.registry[i]
+					return this.registry[i];
 				}
 			}
 
@@ -81,7 +81,7 @@ define(function(require) {
 
 		logPlugins: function()
 		{
-			this.applyToAll("printPlugin");
+			this.applyToAll("printName");
 		}
 	});
 });

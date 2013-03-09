@@ -5,6 +5,8 @@ define(function(require) {
 	var Camera = require("opensteer/Camera");
 	var PluginRegistry = require("opensteer/PluginRegistry");
 
+	var CaptureTheFlag = require("opensteer/plugins/CaptureTheFlag")
+
 	window.requestAnimFrame = (function(){
 		return  window.requestAnimationFrame       ||
 				window.webkitRequestAnimationFrame ||
@@ -26,7 +28,7 @@ define(function(require) {
 			this.selectedVehicle = null;
 			this.enableAnnotation = true;
 
-
+			this.loadPlugins();
 			this.selectedPlugin = this.pluginRegistry.findDefault();
 			this.pluginRegistry.logPlugins();
 			this.openSelectedPlugin();
@@ -49,9 +51,15 @@ define(function(require) {
 			this.selectedPlugin.draw(this.clock.totalSimulationTime, this.clock.elapsedSimulationTime);
 		},
 
+		loadPlugins: function()
+		{
+			this.pluginRegistry.add(new CaptureTheFlag(0,true));
+		},
+
 		openSelectedPlugin: function()
 		{
-
+			console.log("Opening " + this.selectedPlugin.name);
 		}
+
 	});
 });

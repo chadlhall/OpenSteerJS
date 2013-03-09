@@ -50,9 +50,9 @@ define(function(require) {
 
 		},
 
-		printPlugin: function()
+		printName: function()
 		{
-			console.log("Plugin:" + this.name);
+			console.log("Plugin: " + this.name + (this.requestInitialSelection?" (Initial)":""));
 		}
 	});
 });
