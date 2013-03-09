@@ -13,9 +13,14 @@ define(function(require) {
 		},
 
 
+		/**
+		 * Wanders the map
+		 * @param entity the entity that wants to wander. Not sure we need this?
+		 * @return returns a steering vector of type Vector2
+		 */
 		steerForWander: function(entity)
 		{
-
+			
 		},
 
 		// Seek behavior

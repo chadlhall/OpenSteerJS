@@ -21,7 +21,7 @@ define(function(require) {
 		update: function(timeDx)
 		{
 			this._super(timeDx);
-			this.steerSystem.steerForWander(this);
+			this.applySteeringForce(this.steerSystem.steerForWander(this));
 		},
 
 		draw: function(ctx)
@@ -60,6 +60,14 @@ define(function(require) {
 			ctx.restore();
 
 			this._super(ctx);
+		},
+
+		/**
+		 * This function takes a force (x,y) and applies it to the current velocity and movement.
+		 */
+		applySteeringForce:function(force)
+		{
+
 		}
 	});
 });
