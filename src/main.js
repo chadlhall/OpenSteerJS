@@ -1,6 +1,8 @@
 
-requirejs.configure({
-	paths: {}
+require.config({
+	paths: {
+		"OpenSteer": "./"
+	}
 });
 
 require (["OpenSteerDemo"], function(OpenSteerDemo) {

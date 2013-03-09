@@ -1,8 +1,9 @@
 
 define(function(require) {
 
-	var Clock = require("Clock");
-	var Camera = require("Camera");
+	var Clock = require("opensteer/Clock");
+	var Camera = require("opensteer/Camera");
+	var PluginRegistry = require("opensteer/PluginRegistry");
 
 	window.requestAnimFrame = (function(){
 		return  window.requestAnimationFrame       ||
@@ -20,12 +21,14 @@ define(function(require) {
 		{
 			this.clock = new Clock();
 			this.camera = new Camera();
+			this.pluginRegistry = new PluginRegistry();
 			this.selectedPlugin = null;
 			this.selectedVehicle = null;
 			this.enableAnnotation = true;
 
-			this.selectDefaultPlugin();
-			this.logPlugins();
+
+			this.selectedPlugin = this.pluginRegistry.findDefault();
+			this.pluginRegistry.logPlugins();
 			this.openSelectedPlugin();
 		},
 
@@ -44,6 +47,11 @@ define(function(require) {
 
 			this.selectedPlugin.update(this.clock.totalSimulationTime, this.clock.elapsedSimulationTime);
 			this.selectedPlugin.draw(this.clock.totalSimulationTime, this.clock.elapsedSimulationTime);
+		},
+
+		openSelectedPlugin: function()
+		{
+
 		}
 	});
 });
