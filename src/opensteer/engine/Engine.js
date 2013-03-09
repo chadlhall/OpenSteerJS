@@ -103,7 +103,7 @@ define(function(require) {
 					this.impulseVector.y
 							= physicsBody.GetMass() * ((moveVector.y * velocity) - linearVelocity.y);
 
-					physicsBody.ApplyImpulse(this.impulseVector, physicsBody.GetWorldCenter());
+					physicsBody.ApplyForce(this.impulseVector, physicsBody.GetWorldCenter());
 				}
 			}
 		}
