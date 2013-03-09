@@ -20,7 +20,7 @@ define(function(require) {
 		 */
 		steerForWander: function(entity)
 		{
-			
+
 		},
 
 		// Seek behavior
