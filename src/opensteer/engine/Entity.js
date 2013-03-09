@@ -16,6 +16,11 @@ define(function(require) {
 			this.type = type;
 			this.position = new Point(position);
 			this.size = new Dimension(size);
+			this.rotation = 0;
+			this.physicsBody = null;
+
+			this.movementVector = new Point(0, 0);
+			this.velocity = 10;
 		},
 
 		update: function(timeDx)

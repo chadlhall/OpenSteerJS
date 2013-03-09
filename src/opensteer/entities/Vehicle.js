@@ -25,6 +25,7 @@ define(function(require) {
 			ctx.save();
 			ctx.translate(this.position.x, this.position.y);
 			ctx.scale(1, -1);
+			ctx.rotate(this.rotation);
 			ctx.fillStyle = "Black";
 			ctx.beginPath();
 
@@ -39,6 +40,13 @@ define(function(require) {
 
 			ctx.closePath();
 			ctx.fill();
+
+			// Move to top right, draw a white line down the middle so we can see where forward is
+			ctx.beginPath();
+			ctx.moveTo(Math.cos(Math.PI/2) * (this.size.width/2), Math.sin(Math.PI/2) * (this.size.height/2));
+			ctx.lineTo(0, 0);
+			ctx.strokeStyle = "White";
+			ctx.stroke();
 
 			ctx.strokeStyle = "Maroon";
 			ctx.beginPath();
