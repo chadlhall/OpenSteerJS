@@ -10,16 +10,18 @@ define(function(require) {
 	var Point = MathUtils.Point;
 
 	return Entity.extend({
-		init: function(position, size, fillColor)
+		init: function(position, size, fillColor, steerSystem)
 		{
 			this._super("Vehicle", position, size);
 
 			this.fillColor = fillColor;
+			this.steerSystem = steerSystem;
 		},
 
 		update: function(timeDx)
 		{
 			this._super(timeDx);
+			this.steerSystem.steerForWander(this);
 		},
 
 		draw: function(ctx)

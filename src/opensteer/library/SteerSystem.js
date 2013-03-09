@@ -7,9 +7,9 @@ define(function(require) {
 
 	return Class.extend({
 
-		init: function()
+		init: function(entities)
 		{
-			this.entities = [];
+			this.entities = entities;
 		},
 
 
@@ -155,16 +155,6 @@ define(function(require) {
 		steerForTargetSpeed:function(entity,targetSpeed)
 		{
 
-		},
-
-		addEntity: function(entity)
-		{
-			this.entities.push(entity);
-		},
-
-		removeEntity: function(entity)
-		{
-			this.entities.splice(this.entities.indexOf(entity),1);
 		}
 	});
 });

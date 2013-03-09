@@ -7,6 +7,7 @@ define(function(require) {
 	var Vehicle = require("entities/Vehicle");
 	var FlagStand = require("entities/FlagStand");
 	var MathUtils = require("engine/MathUtils");
+	var SteerSystem = require("library/SteerSystem");
 
 
 	var Point = MathUtils.Point;
@@ -17,6 +18,7 @@ define(function(require) {
 		init: function()
 		{
 			this._super();
+			this.steerSystem = new SteerSystem(this.entities);
 		},
 
 		start: function()
@@ -54,7 +56,7 @@ define(function(require) {
 					boundingRect.height = size;
 				} while (!this.isAreaEmpty(boundingRect));
 
-				var defender = new Vehicle(new Point(boundingRect.x, boundingRect.y), new Dimension(size, size), "Red");
+				var defender = new Vehicle(new Point(boundingRect.x, boundingRect.y), new Dimension(size, size), "Red", this.steerSystem);
 				this.addEntity(defender);
 			}
 
@@ -67,7 +69,7 @@ define(function(require) {
 				boundingRect.height = size;
 			} while (!this.isAreaEmpty(boundingRect));
 
-			var seeker = new Vehicle(new Point(boundingRect.x, boundingRect.y), new Dimension(size, size), "Green");
+			var seeker = new Vehicle(new Point(boundingRect.x, boundingRect.y), new Dimension(size, size), "Green", this.steerSystem);
 			this.addEntity(seeker);
 
 			// And add a flag stand
