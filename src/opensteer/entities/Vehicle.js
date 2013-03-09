@@ -10,9 +10,11 @@ define(function(require) {
 	var Point = MathUtils.Point;
 
 	return Entity.extend({
-		init: function(position, size)
+		init: function(position, size, fillColor)
 		{
 			this._super("Vehicle", position, size);
+
+			this.fillColor = fillColor;
 		},
 
 		update: function(timeDx)
@@ -26,7 +28,7 @@ define(function(require) {
 			ctx.translate(this.position.x, this.position.y);
 			ctx.scale(1, -1);
 			ctx.rotate(this.rotation);
-			ctx.fillStyle = "Black";
+			ctx.fillStyle = this.fillColor;
 			ctx.beginPath();
 
 			// Move to lower left of triangle

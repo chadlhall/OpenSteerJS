@@ -4,6 +4,7 @@ define(function(require) {
 	var Clock = require("engine/Clock");
 
 	var b2World = Box2D.Dynamics.b2World,
+			b2AABB = Box2D.Collision.b2AABB,
 			b2BodyDef = Box2D.Dynamics.b2BodyDef,
 			b2Body = Box2D.Dynamics.b2Body,
 			b2FixtureDef = Box2D.Dynamics.b2FixtureDef,
@@ -106,6 +107,36 @@ define(function(require) {
 					physicsBody.ApplyForce(this.impulseVector, physicsBody.GetWorldCenter());
 				}
 			}
+		},
+
+		findEntitiesInArea: function(area, callback)
+		{
+			var aabb = new b2AABB();
+
+			aabb.lowerBound.Set(area.x/PIXEL_SCALE, area.y/PIXEL_SCALE);
+			aabb.upperBound.Set((area.x+area.width)/PIXEL_SCALE, (area.y+area.height)/PIXEL_SCALE);
+
+			this.world.QueryAABB(function(fixture) {
+				var entity = fixture.GetBody().GetUserData();
+				return callback(entity);
+			}, aabb);
+		},
+
+		isAreaEmpty: function(area)
+		{
+			var empty = true;
+
+			this.findEntitiesInArea(area, function(entity) {
+				if (entity)
+				{
+					return true;
+				}
+
+				empty = false;
+				return false;
+			});
+
+			return empty;
 		}
 
 	});
