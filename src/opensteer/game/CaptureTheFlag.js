@@ -42,6 +42,7 @@ define(function(require) {
 				} while (!this.isAreaEmpty(boundingRect));
 
 				var circleObstacle = new CircularObstacle(new Point(boundingRect.x, boundingRect.y), new Dimension(size, size));
+				circleObstacle.isStatic = true;
 				this.addEntity(circleObstacle);
 			}
 

@@ -26,8 +26,6 @@ define(function(require) {
 
 			var newUp = new Vector2(Math.cos(newRotation), -Math.sin(newRotation));
 
-			entity.rotation = newRotation;
-
 			return newUp;
 		},
 

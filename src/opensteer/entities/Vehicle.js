@@ -69,14 +69,9 @@ define(function(require) {
 		 */
 		applySteeringForce:function(force)
 		{
-			if (this.fillColor === "Green")
-			{
-				console.log(this.rotation);
-			}
-
 			this.movementVector.x = force.x;
 			this.movementVector.y = force.y;
-
+			this.rotation = Math.atan2(-force.y, force.x);
 		}
 	});
 });

@@ -50,7 +50,7 @@ define(function(require) {
 
 			var bodyDef = new b2BodyDef();
 			bodyDef.position.Set(entity.position.x/PIXEL_SCALE, entity.position.y/PIXEL_SCALE);
-			bodyDef.type = b2Body.b2_dynamicBody;
+			bodyDef.type = entity.isStatic ? b2Body.b2_staticBody : b2Body.b2_dynamicBody;
 			bodyDef.userData = entity;
 			bodyDef.fixedRotation = true;
 
@@ -134,11 +134,11 @@ define(function(require) {
 			this.findEntitiesInArea(area, function(entity) {
 				if (entity)
 				{
-					return true;
+					empty = false;
+					return false;
 				}
 
-				empty = false;
-				return false;
+				return true;
 			});
 
 			return empty;

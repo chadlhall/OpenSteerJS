@@ -17,11 +17,12 @@ define(function(require) {
 			this.position = new Point(position);
 			this.size = new Dimension(size);
 			this.rotation = 0;
+
+			this.isStatic = false;
 			this.physicsBody = null;
 
 			this.movementVector = new Point(0, 0); // They start out pointing up
 			this.velocity = 10;
-			this.rotationalVelocity = 0;
 		},
 
 		update: function(timeDx)
