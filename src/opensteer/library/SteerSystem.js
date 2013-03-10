@@ -32,13 +32,18 @@ define(function(require) {
 		// Seek behavior
 		steerForSeek: function(entity, targetEntity)
 		{
+			var offset = targetEntity.position.subtract(entity.position);
+			var desiredVelocity = offset.truncateLength(entity.velocity);
+			return desiredVelocity.subtract(entity.movementVector);
 
 		},
 
 		// Flee behavior
 		steerForFlee: function(entity, targetEntity)
 		{
-
+			var offset = entity.position.subtract(targetEntity.position.subtract);
+			var desiredVelocity = offset.truncateLength(entity.velocity);
+			return desiredVelocity.subtract(entity.movementVector);
 		},
 
 		// Path Following behaviors

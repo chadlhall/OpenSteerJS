@@ -10,12 +10,13 @@ define(function(require) {
 	var Point = MathUtils.Point;
 
 	return Entity.extend({
-		init: function(position, size, fillColor, steerSystem)
+		init: function(position, size, fillColor, steerSystem, target)
 		{
 			this._super("Vehicle", position, size);
 
 			this.fillColor = fillColor;
 			this.steerSystem = steerSystem;
+			this.target = target;
 
 			this.movementVector.x = 1;
 		},
@@ -23,7 +24,8 @@ define(function(require) {
 		update: function(timeDx)
 		{
 			this._super(timeDx);
-			this.applySteeringForce(this.steerSystem.steerForWander(this), timeDx);
+			//this.applySteeringForce(this.steerSystem.steerForWander(this), timeDx);
+			this.applySteeringForce(this.steerSystem.steerForSeek(this, this.target), timeDx);
 		},
 
 		draw: function(ctx)

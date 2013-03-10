@@ -55,7 +55,54 @@ define(function(require) {
 			var length = Math.sqrt((this.x * this.x) + (this.y * this.y));
 			this.x = this.x / length;
 			this.y = this.y / length;
+		},
+
+		// vector addition
+		add:function(vector)
+		{
+			return new Point(this.x+vector.x, this.y+vector.y);
+		},
+
+		// vector subtraction
+		subtract:function(vector)
+		{
+			return new Point(this.x-vector.x, this.y-vector.y);
+		},
+
+		// vector times scalar product (scale length of vector times argument)
+		multiply:function(scalar)
+		{
+			return new Point(this.x * scalar, this.y * scalar);
+		},
+
+		dot:function(other)
+		{
+			return this.x * other.x + this.y * other.y;
+		},
+
+		lengthSquared: function()
+		{
+			return this.dot(this);
+		},
+
+		length: function()
+		{
+			return Math.sqrt(this.lengthSquared());
+		},
+
+		truncateLength:function(maxLength)
+		{
+			var maxLengthSquared = maxLength * maxLength;
+			var vecLengthSquared = this.lengthSquared();
+			if (vecLengthSquared <= maxLengthSquared)
+			{
+				return this;
+			}
+			else {
+				return this.multiply(maxLength / Math.sqrt(vecLengthSquared));
+			}
 		}
+
 	});
 
 	var Dimension = Class.extend({
