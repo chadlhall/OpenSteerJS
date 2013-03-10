@@ -38,18 +38,15 @@ define(function(require) {
 				true                 //allow sleep
 			);
 
-			if (typeof(window) !== 'undefined' && document.getElementById("canvas"))
+			if (typeof(window) !== 'undefined' && this.canvas)
 			{
 				this.debugDraw = new B2DebugDraw();
-				this.debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
+				this.debugDraw.SetSprite(this.ctx);
 				this.debugDraw.SetDrawScale(10);
 				this.debugDraw.SetFillAlpha(0.3);
 				this.debugDraw.SetLineThickness(1.0);
 				this.debugDraw.SetFlags(B2DebugDraw.e_shapeBit | B2DebugDraw.e_jointBit);
 				this.world.SetDebugDraw(this.debugDraw);
-
-				this.offsetX = 0;
-				this.offsetY = 0;
 			}
 
 			this.impulseVector = new b2Vec2(0, 0);
@@ -135,6 +132,14 @@ define(function(require) {
 				{
 					physicsBody.ApplyTorque(entity.rotationalVelocity);
 				}
+			}
+
+			if (this.debugDraw)
+			{
+				var ctx = this.debugDraw.GetSprite();
+				ctx.save();
+				this.world.DrawDebugData();
+				ctx.restore();
 			}
 		},
 
