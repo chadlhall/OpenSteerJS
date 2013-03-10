@@ -23,7 +23,7 @@ define(function(require) {
 		update: function(timeDx)
 		{
 			this._super(timeDx);
-			this.applySteeringForce(this.steerSystem.steerForWander(this));
+			this.applySteeringForce(this.steerSystem.steerForWander(this), timeDx);
 		},
 
 		draw: function(ctx)
@@ -67,16 +67,24 @@ define(function(require) {
 		/**
 		 * This function takes a force (x,y) and applies it to the current velocity and movement.
 		 */
-		applySteeringForce:function(force)
+		applySteeringForce:function(force, timeDx)
 		{
 			if (this.fillColor === "Green")
 			{
 				console.log(this.rotation);
 			}
-
+			var adjustedForce = this.adjustRawSteeringForce(force,timeDx);
+			var clippedForce = 
 			this.movementVector.x = force.x;
 			this.movementVector.y = force.y;
 
+		},
+
+		adjustRawSteeringForce:function(force, timeDx)
+		{
+
 		}
+
+
 	});
 });
