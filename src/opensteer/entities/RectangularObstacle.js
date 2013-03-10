@@ -20,10 +20,8 @@ define(function(require) {
 		{
 			ctx.save();
 			ctx.strokeStyle = "Orange";
-			ctx.translate(this.position.x, this.position.y);
-			ctx.beginPath();
-			ctx.rect(-this.width/2, -this.height/2, this.size.width, this.size.height);
-			ctx.stroke();
+			ctx.strokeRect(this.position.x-this.size.width/2, this.position.y-this.size.height/2, this.size.width, this.size.height);
+
 			ctx.restore();
 
 			this._super(ctx);

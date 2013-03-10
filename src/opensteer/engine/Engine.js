@@ -38,7 +38,7 @@ define(function(require) {
 				true                 //allow sleep
 			);
 
-			if (typeof(window) !== 'undefined' && this.canvas)
+			if (typeof(window) !== 'undefined' && this.canvas && false)
 			{
 				this.debugDraw = new B2DebugDraw();
 				this.debugDraw.SetSprite(this.ctx);
