@@ -71,12 +71,14 @@ define(function(require) {
 		{
 			if (this.fillColor === "Green")
 			{
-				console.log(this.rotation);
+				//console.log(this.rotation);
 			}
-			var adjustedForce = this.adjustRawSteeringForce(force,timeDx);
-			var clippedForce = 
+			//var adjustedForce = this.adjustRawSteeringForce(force,timeDx);
+			//var clippedForce =
+			// old code
 			this.movementVector.x = force.x;
 			this.movementVector.y = force.y;
+			this.rotation = Math.atan2(-force.y, force.x);
 
 		},
 

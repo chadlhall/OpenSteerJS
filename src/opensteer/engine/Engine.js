@@ -9,7 +9,9 @@ define(function(require) {
 			b2Body = Box2D.Dynamics.b2Body,
 			b2FixtureDef = Box2D.Dynamics.b2FixtureDef,
 			b2Vec2 = Box2D.Common.Math.b2Vec2,
-			b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
+			b2CircleShape = Box2D.Collision.Shapes.b2CircleShape,
+			b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape,
+			B2DebugDraw = Box2D.Dynamics.b2DebugDraw;
 
 	var PIXEL_SCALE = 10;
 
@@ -36,6 +38,20 @@ define(function(require) {
 				true                 //allow sleep
 			);
 
+			if (typeof(window) !== 'undefined' && document.getElementById("canvas"))
+			{
+				this.debugDraw = new B2DebugDraw();
+				this.debugDraw.SetSprite(document.getElementById("canvas").getContext("2d"));
+				this.debugDraw.SetDrawScale(10);
+				this.debugDraw.SetFillAlpha(0.3);
+				this.debugDraw.SetLineThickness(1.0);
+				this.debugDraw.SetFlags(B2DebugDraw.e_shapeBit | B2DebugDraw.e_jointBit);
+				this.world.SetDebugDraw(this.debugDraw);
+
+				this.offsetX = 0;
+				this.offsetY = 0;
+			}
+
 			this.impulseVector = new b2Vec2(0, 0);
 		},
 
@@ -46,11 +62,19 @@ define(function(require) {
 			fixDef.friction = 0.5;
 			fixDef.restitution = 0.2;
 
-			fixDef.shape = new b2CircleShape(entity.size.width/2/PIXEL_SCALE);
+			if (entity.type === "RectangularObstacle")
+			{
+				fixDef.shape = new b2PolygonShape();
+				fixDef.shape.SetAsBox(entity.size.width/PIXEL_SCALE, entity.size.height/PIXEL_SCALE);
+			}
+			else
+			{
+				fixDef.shape = new b2CircleShape(entity.size.width/2/PIXEL_SCALE);
+			}
 
 			var bodyDef = new b2BodyDef();
 			bodyDef.position.Set(entity.position.x/PIXEL_SCALE, entity.position.y/PIXEL_SCALE);
-			bodyDef.type = b2Body.b2_dynamicBody;
+			bodyDef.type = entity.isStatic ? b2Body.b2_staticBody : b2Body.b2_dynamicBody;
 			bodyDef.userData = entity;
 			bodyDef.fixedRotation = true;
 
@@ -134,11 +158,11 @@ define(function(require) {
 			this.findEntitiesInArea(area, function(entity) {
 				if (entity)
 				{
-					return true;
+					empty = false;
+					return false;
 				}
 
-				empty = false;
-				return false;
+				return true;
 			});
 
 			return empty;

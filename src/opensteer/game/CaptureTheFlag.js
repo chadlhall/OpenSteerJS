@@ -4,6 +4,7 @@ define(function(require) {
 	var Engine = require("engine/Engine");
 
 	var CircularObstacle = require("entities/CircularObstacle");
+	var RectangularObstacle = require("entities/RectangularObstacle");
 	var Vehicle = require("entities/Vehicle");
 	var FlagStand = require("entities/FlagStand");
 	var MathUtils = require("engine/MathUtils");
@@ -30,6 +31,25 @@ define(function(require) {
 			var boundingRect = new Rectangle(0, 0, 0, 0);
 			var size = 0;
 
+
+			//Generate the walls around the map
+			var top = new RectangularObstacle(new Point(0,0), new Dimension(768,10));
+			top.isStatic = true;
+			this.addEntity(top);
+
+			var bottom = new RectangularObstacle(new Point(0,758), new Dimension(768,10));
+			bottom.isStatic = true;
+			this.addEntity(bottom);
+
+			var left = new RectangularObstacle(new Point(0,0), new Dimension(10,768));
+			left.isStatic = true;
+			this.addEntity(left);
+
+			var right = new RectangularObstacle(new Point(758,0), new Dimension(10,768));
+			right.isStatic = true;
+			this.addEntity(right);
+
+
 			// Generate 3 random barriers
 			for (i = 0; i < 3; i++)
 			{
@@ -42,6 +62,7 @@ define(function(require) {
 				} while (!this.isAreaEmpty(boundingRect));
 
 				var circleObstacle = new CircularObstacle(new Point(boundingRect.x, boundingRect.y), new Dimension(size, size));
+				circleObstacle.isStatic = true;
 				this.addEntity(circleObstacle);
 			}
 
