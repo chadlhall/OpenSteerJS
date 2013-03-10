@@ -19,6 +19,11 @@ define(function(require) {
 			this.target = target;
 
 			this.movementVector.x = 1;
+
+			if (this.fillColor === "Red")
+			{
+				this.velocity = 4;
+			}
 		},
 
 		update: function(timeDx)

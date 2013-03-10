@@ -22,7 +22,7 @@ define(function(require) {
 			this.physicsBody = null;
 
 			this.movementVector = new Point(0, 0); // They start out pointing up
-			this.velocity = 10;
+			this.velocity = 5;
 		},
 
 		update: function(timeDx)
