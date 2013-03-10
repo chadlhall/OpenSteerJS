@@ -15,6 +15,9 @@ define(function(require) {
 	var Dimension = MathUtils.Dimension;
 	var Rectangle = MathUtils.Rectangle;
 
+	var BOX_WIDTH = 10;
+	var CANVAS_SIZE = 768; //TODO: get this from the canvas
+
 	return Engine.extend({
 		init: function()
 		{
@@ -33,19 +36,19 @@ define(function(require) {
 
 
 			//Generate the walls around the map
-			var top = new RectangularObstacle(new Point(0,0), new Dimension(768,10));
+			var top = new RectangularObstacle(new Point(CANVAS_SIZE/2,BOX_WIDTH/2), new Dimension(CANVAS_SIZE,BOX_WIDTH));
 			top.isStatic = true;
 			this.addEntity(top);
 
-			var bottom = new RectangularObstacle(new Point(0,758), new Dimension(768,10));
+			var bottom = new RectangularObstacle(new Point(CANVAS_SIZE/2,CANVAS_SIZE-BOX_WIDTH/2), new Dimension(CANVAS_SIZE,BOX_WIDTH));
 			bottom.isStatic = true;
 			this.addEntity(bottom);
 
-			var left = new RectangularObstacle(new Point(0,0), new Dimension(10,768));
+			var left = new RectangularObstacle(new Point(BOX_WIDTH/2,CANVAS_SIZE/2), new Dimension(BOX_WIDTH,CANVAS_SIZE));
 			left.isStatic = true;
 			this.addEntity(left);
 
-			var right = new RectangularObstacle(new Point(758,0), new Dimension(10,768));
+			var right = new RectangularObstacle(new Point(CANVAS_SIZE - BOX_WIDTH/2,CANVAS_SIZE/2), new Dimension(BOX_WIDTH,CANVAS_SIZE));
 			right.isStatic = true;
 			this.addEntity(right);
 

@@ -62,7 +62,7 @@ define(function(require) {
 			if (entity.type === "RectangularObstacle")
 			{
 				fixDef.shape = new b2PolygonShape();
-				fixDef.shape.SetAsBox(entity.size.width/PIXEL_SCALE, entity.size.height/PIXEL_SCALE);
+				fixDef.shape.SetAsBox(entity.size.width/PIXEL_SCALE/2, entity.size.height/PIXEL_SCALE/2);
 			}
 			else
 			{

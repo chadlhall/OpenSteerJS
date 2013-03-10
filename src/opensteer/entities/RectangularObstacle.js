@@ -22,7 +22,7 @@ define(function(require) {
 			ctx.strokeStyle = "Orange";
 			ctx.translate(this.position.x, this.position.y);
 			ctx.beginPath();
-			ctx.rect(0, 0, this.size.width, this.size.height);
+			ctx.rect(-this.width/2, -this.height/2, this.size.width, this.size.height);
 			ctx.stroke();
 			ctx.restore();
 
