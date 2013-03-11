@@ -49,7 +49,17 @@ define(function(require) {
 			ctx.translate(this.position.x, this.position.y);
 			ctx.scale(1, -1);
 			ctx.rotate(this.rotation);
-			ctx.fillStyle = "Red";
+            if(this.resting)
+            {
+
+                var r = Math.round((MAX_STAMINA - this.stamina)/MAX_STAMINA * 175);
+                ctx.fillStyle = "rgba("+r+",0,255,1)";
+            } else if(this.prey)
+            {
+                ctx.fillStyle = "Red";
+            } else {
+                ctx.fillStyle = "Blue";
+            }
 			ctx.beginPath();
 
 			// Move to right side of triangle

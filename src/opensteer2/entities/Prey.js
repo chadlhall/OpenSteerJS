@@ -40,7 +40,7 @@ define(function(require) {
 			ctx.translate(this.position.x, this.position.y);
 			ctx.scale(1, -1);
 			ctx.rotate(this.rotation);
-			ctx.fillStyle = "Green";
+			ctx.fillStyle = this.hunter?"Yellow":"Green";
 			ctx.beginPath();
 
 			// Move to right side of triangle
