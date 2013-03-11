@@ -21,6 +21,8 @@ define(function(require) {
 			this.position = new Point(position);
 			this.size = new Dimension(size);
 			this.mass = mass;
+			this.movementVector = new Vector2(0, 0);
+			//this.velocity = 4;
 			this.velocity = new Vector2(-1,-2);
 			this.rotation = 0;
 

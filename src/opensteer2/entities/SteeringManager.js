@@ -142,6 +142,8 @@ define(function(require) {
 			velocity.add(this.steering);
 			velocity.truncateLength( this.host.getMaxVelocity());
 
+			//this.host.movementVector.x = velocity.x;
+			//this.host.movementVector.y = velocity.y;
 			position.add(velocity);
 		},
 

@@ -109,13 +109,13 @@ define(function(require) {
 				entity.update(timeDx,this);
 				entity.draw(this.ctx);
 
-				/*var physicsBody = entity.physicsBody;
+				var physicsBody = entity.physicsBody;
 
 				entity.position.x = physicsBody.GetPosition().x*PIXEL_SCALE;
 				entity.position.y = physicsBody.GetPosition().y*PIXEL_SCALE;
 				//entity.rotation = physicsBody.GetAngle();
 
-			/*	var linearVelocity = physicsBody.GetLinearVelocity();
+				/*var linearVelocity = physicsBody.GetLinearVelocity();
 				if (!entity.movementVector.isOrigin())
 				{
 					var moveVector = entity.movementVector;
@@ -123,15 +123,15 @@ define(function(require) {
 
 					this.impulseVector.SetZero();
 					this.impulseVector.x
-							= physicsBody.GetMass() * ((moveVector.x * velocity) - linearVelocity.x);
+							= physicsBody.GetMass() * (moveVector.x - linearVelocity.x);
 
 					this.impulseVector.y
-							= physicsBody.GetMass() * ((moveVector.y * velocity) - linearVelocity.y);
+							= physicsBody.GetMass() * (moveVector.y - linearVelocity.y);
 
 					physicsBody.ApplyImpulse(this.impulseVector, physicsBody.GetWorldCenter());
-				}
+				}*/
 
-				if (entity.rotationalVelocity !== 0)
+				/*if (entity.rotationalVelocity !== 0)
 				{
 					physicsBody.ApplyTorque(entity.rotationalVelocity);
 				}*/
