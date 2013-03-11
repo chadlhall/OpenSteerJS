@@ -10,7 +10,7 @@ define(function(require) {
 	var Prey = require("entities/Prey");
 	var Hunter = require("entities/Hunter");
 	var FlagStand = require("entities/FlagStand");
-	
+
 	var Point = MathUtils.Point;
 	var Dimension = MathUtils.Dimension;
 	var Rectangle = MathUtils.Rectangle;
